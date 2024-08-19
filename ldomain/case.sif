@@ -33,8 +33,8 @@ Simulation
   Max Output Level = 7
   Coordinate System = Cartesian
   Simulation Type = Steady state
-  Steady State Max Iterations = 1 !1000
-  Output Intervals = 1 ! 100
+  Steady State Max Iterations = 1000
+  Output Intervals = 100
 coordinate scaling = 1000
   Post File = a.vtu 
 !  vtu: Save Bulk Only = Logical True
@@ -87,14 +87,14 @@ Solver 2
   Linear System Solver = direct
   Linear System Direct Method = mumps
 
-  Filter Method = String "density"  ! density, sensitivity, none
+  Filter Method = String "sensitivity"  ! density, sensitivity, none
   Sensitivity Filter Threshold = Real $wmin
 
 ! If you want to use PDE filter activate the following:
 !  Filter Diffusion Constant(2) = Real 1.0 1.0 
 !  Variable = xNodal
 
-  Filter Type = String "distance" ! distance, pde, simple
+  Filter Type = String "simple" ! distance, pde, simple
   Distance Filter Radius = Real $rmax
 !  Simple Filter Iterations = Integer 3
 
@@ -112,7 +112,7 @@ End
 Equation 1
   Name = "Elast"
   Calculate Stresses = True
-  Active Solvers(1) = 1 !2
+  Active Solvers(2) = 1 2
 
 ! This has been checked!
   Plane Stress = True
@@ -134,7 +134,7 @@ End
 Boundary Condition 2
   Target Boundaries(1) = 2
   Name = "PointLoad"
-  Displacement 2 Load = Real -750000
+  Displacement 2 Load = Real -0.75
 End
 
 
