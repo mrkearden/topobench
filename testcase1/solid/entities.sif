@@ -1,0 +1,22 @@
+!------ Skeleton for body section -----
+Body 1
+  Name = beam
+End
+
+!------ Skeleton for boundary section -----
+Boundary Condition 1
+  Name = sym
+End
+
+Boundary Condition 2
+  Name = load
+End
+
+Boundary Condition 3
+  Name = support
+End
+
+Boundary Condition 4
+  Name = bnry6
+End
+

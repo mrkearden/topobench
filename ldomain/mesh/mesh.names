@@ -1,0 +1,6 @@
+! ----- names for bodies -----
+$ body = 1
+! ----- names for boundaries -----
+$ support = 1
+$ load = 2
+$ bnry4 = 3

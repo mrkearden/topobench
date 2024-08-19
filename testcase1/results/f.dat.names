@@ -1,0 +1,11 @@
+Metadata for SaveScalars file: results/f.dat
+Elmer version: 9.0
+Elmer compilation date: 2024-08-14
+Solver input file: case.sif
+File started at: 2024/08/18 08:04:42
+ 
+Variables in columns of matrix: 
+   1: res: solver cpu time linearelasticity
+   2: res: solver real time linearelasticity
+   3: res: solver cpu time topoopt
+   4: res: solver real time topoopt

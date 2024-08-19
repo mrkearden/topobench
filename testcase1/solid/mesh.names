@@ -1,0 +1,7 @@
+! ----- names for bodies -----
+$ beam = 1
+! ----- names for boundaries -----
+$ sym = 1
+$ load = 2
+$ support = 3
+$ bnry6 = 4

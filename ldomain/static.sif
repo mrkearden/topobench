@@ -1,0 +1,101 @@
+!--------------------------------------------------------
+! Test case for topology optimization.
+! Peter Råback & Stefan Hiemer, 2024.
+!
+! This case is the basic compliance minimization problem of a 2D
+! elastic structure, see e.g.
+! O. Sigmund, “A 99 line topology optimization code written in matlab,”
+! Structural and multidisciplinary optimization, vol. 21, pp. 120–127, 200.
+!
+! This test case with
+! - distance based density filter
+!
+! Note that the test is not run to the end. Add SS iterations
+! and resolution for better solution. 
+!-------------------------------------------------------------
+
+Header
+  CHECK KEYWORDS Warn
+  Mesh DB "." "mesh"
+  Include Path ""
+  Results Directory "results"
+End
+
+Simulation
+  Max Output Level = 7
+  Coordinate System = Cartesian
+  Simulation Type = Steady state
+  Steady State Max Iterations = 1 !1000
+  Output Intervals = 1 ! 100
+coordinate scaling = 1000
+  Post File = static.vtu 
+!  vtu: Save Bulk Only = Logical True
+!  vtu: ascii output = logical True
+
+  Mesh Levels = 1
+End
+
+Body 1
+  Target Bodies(1) = 1
+  Name = "Body Property 1"
+  Equation = 1
+  Material = 1
+!  Initial Condition = 1
+End
+
+
+Solver 1
+  Equation = LinearElasticity
+  Procedure = "StressSolve" "StressSolver"
+  Variable = -dofs 2 Displacement
+
+  Nonlinear System Max Iterations = 1
+
+  Linear System Solver = Direct
+  Linear System Direct Method = mumps
+ 
+  Local Matrix Identical = Logical False
+  Local Matrix Storage = Logical True  
+
+!  Matrix Multiplier Name = String "topo mult"
+
+  Optimize Bandwidth = False
+  Solver Timing = True
+
+  Steady State Convergence Tolerance = 1.0e-4
+  Displace Mesh = False
+End
+
+
+
+Equation 1
+  Name = "Elast"
+  Calculate Stresses = True
+  Active Solvers(1) = 1 
+
+! This has been checked!
+  Plane Stress = True
+End
+
+Material 1
+  Name = "PlaneStuff"
+  Youngs modulus = 200.0
+  Poisson ratio = 0.3
+End
+
+Boundary Condition 1
+  Target Boundaries(1) = 1
+  Name = "fixed"
+  Displacement 1 = 0.0
+  Displacement 2 = 0.0
+End
+
+Boundary Condition 2
+  Target Boundaries(1) = 2
+  Name = "PointLoad"
+  Displacement 2 Load = Real -.75
+End
+
+
+
+
